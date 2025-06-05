@@ -57,23 +57,23 @@ bool placeShip(char board[ROWS][COLS], int length, char symbol) {
     while (true) {
         std::string coord;
         char orient;
-        std::cout << "Enter starting coordinate for ship " << symbol
-                  << " (length " << length << ") e.g. A1: ";
+        std::cout << "Lutfen gemi " << symbol<< " icin baslangic koordinati giriniz." 
+                  << " (uzunluk " << length << ") or. A1: ";
         std::cin >> coord;
-        std::cout << "Orientation (H/V): ";
+        std::cout << "Yon seciniz (H:(yatay)/V:(dikey)): ";
         std::cin >> orient;
         orient = std::toupper(orient);
         int row, col;
         if (!parseCoordinate(coord, row, col) || (orient != 'H' && orient != 'V')) {
-            std::cout << "Invalid input. Try again.\n";
+            std::cout << "Gecersiz koordinat, tekrar deneyin.\n";
             continue;
         }
         if (orient == 'H' && col + length > COLS) {
-            std::cout << "Ship does not fit horizontally.\n";
+            std::cout << "Gemi yatay olarak sigmadi.\n";
             continue;
         }
         if (orient == 'V' && row + length > ROWS) {
-            std::cout << "Ship does not fit vertically.\n";
+            std::cout << "Gemi dikey olarak sigmadi.\n";
             continue;
         }
         bool overlap = false;
@@ -86,7 +86,7 @@ bool placeShip(char board[ROWS][COLS], int length, char symbol) {
             }
         }
         if (overlap) {
-            std::cout << "Ship overlaps with another ship.\n";
+            std::cout << "Gemi baska bir gemi ile cakisiyor\n";
             continue;
         }
         for (int i = 0; i < length; ++i) {
@@ -117,24 +117,24 @@ int main() {
 
     while (remaining > 0) {
         std::string target;
-        std::cout << "Enter target coordinate (e.g. F6): ";
+        std::cout << "Hedef koordinati giriniz (or. F6): ";
         std::cin >> target;
         int row, col;
         if (!parseCoordinate(target, row, col)) {
-            std::cout << "Invalid coordinate.\n";
+            std::cout << "Gecersiz koordinat.\n";
             continue;
         }
         if (aim[row][col] != EMPTY) {
-            std::cout << "Already targeted.\n";
+            std::cout << "Daha once isaretlendi.\n";
             continue;
         }
         if (ships[row][col] >= 'A' && ships[row][col] <= 'E') {
-            std::cout << "Hit!\n";
+            std::cout << "Isabetli!\n";
             ships[row][col] = HIT;
             aim[row][col] = HIT;
             --remaining;
         } else {
-            std::cout << "Miss.\n";
+            std::cout << "Kacti.\n";
             ships[row][col] = MISS;
             aim[row][col] = MISS;
         }
@@ -142,6 +142,9 @@ int main() {
         writeBoard(aim, "2ndaim.txt");
     }
 
-    std::cout << "All ships have been sunk!\n";
+    std::cout << "Tum gemiler batirildi!\n";
+
+   
+    
     return 0;
 }
