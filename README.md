@@ -1,4 +1,4 @@
-# amiralBatti
+
 # Battleship Text Game
 
 This project implements a simple one-sided Battleship game in C++.
